@@ -19,7 +19,7 @@ class Inventory:
  .  the function, you should return the dynamic array with product structures 
  '  stored in it.
     '''
-    def __init__(self, product_names: List[str], stocks List[int], prices: List[float]) -> None:
+    def __init__(self, product_names: List[str], stocks: List[int], prices: List[float]) -> None:
         # Store products in a private DynamicArray member
         self._products: DynamicArray = DynamicArray(dtype=ctypes.py_object)
         
@@ -39,7 +39,7 @@ class Inventory:
         pass
 
     '''
-    This method should return the Product indexed by i in the dyanmic array.
+    This method should return the Product indexed by i in the dynamic array.
     It should return None if the number of products is zero (empty dynamic array)
     and it should return None if the index i is out of range of the valid
     indices in the dynamic array. Otherwise, it should return the product -- not a
@@ -108,14 +108,6 @@ class Inventory:
     '''
     def sort_by_stock(self) -> None:
         pass
-
-    '''
-    This function should return the i-th product from the underlying dynamic array
-    It should also return None with the Dynamic Array is empty, and None if the 
-    index is out of range.
-    '''
-    def get_product(self,i) -> Optional[Product]:
-        # Logic to return the i-th product from the inventory DynamicArray 
 
 
     '''
