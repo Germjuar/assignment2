@@ -44,6 +44,7 @@ print(max_price)
 
 max_investment = inventory.find_max_investment()
 print("==", "Here's the product with the maximum investment:")
+print(max_investment)
 
 inventory.sort_by_stock()
 print("==", "Here are the products ordered by increasing stock-count: ")
