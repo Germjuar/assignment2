@@ -24,7 +24,9 @@ class Inventory:
         self._products: DynamicArray = DynamicArray(dtype=ctypes.py_object)
         
         # Logic to iterate through arguments and insert_last into self._products
-        pass
+        for i in range(len(product_names)):
+            new_product = Product(product_names[i], stocks[i], prices[i])
+            self._products.insert_last(new_product)
 
     '''
     ## Dynamic Array helper functions. These three functions will be how you interface
@@ -36,7 +38,7 @@ class Inventory:
     This method should return the total number of products in the inventory.
     '''
     def get_total_products(self) -> int:
-        pass
+        return len(self._products)
 
     '''
     This method should return the Product indexed by i in the dynamic array.
@@ -46,7 +48,9 @@ class Inventory:
     copy of the product, but the Product itself (i.e. don't allocate new memory)
     '''
     def get_product(self,i: int) -> Optional[Product]:
-        pass
+        if self.get_total_products() == 0 or i < 0 or i >= self.get_total_products():
+            return None
+        return self._products[i]
 
     '''
     This method should assign the value of the input Product "product"
@@ -56,7 +60,10 @@ class Inventory:
     and exit. 
     '''
     def set_product(self, i: int, product: Product) -> None:
-        pass
+        if i < 0 or i >= self.get_total_products():
+            print("Error: out of range!")
+            return
+        self._products[i] = product
 
     '''
     *** Below here you are not to access self._products dynamic array directly ***
@@ -76,7 +83,17 @@ class Inventory:
     the array. If the _products list is emtpy, it should return None.
     '''
     def find_max_price(self) -> Optional[Product]:
-        pass
+        total = self.get_total_products()
+        if total == 0:
+            return None
+        
+        max_product = self.get_product(0)
+        for i in range(1, total):
+            current_product = self.get_product(i)
+            if current_product.price > max_product.price:
+                max_product = current_product
+                
+        return max_product
 
     '''
     This function should return the product in a given Inventory object with
