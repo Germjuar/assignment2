@@ -83,10 +83,11 @@ class Inventory:
     the array. If the _products list is emtpy, it should return None.
     '''
     def find_max_price(self) -> Optional[Product]:
+        #check if array is empty
         total = self.get_total_products()
         if total == 0:
             return None
-        
+        #assign and iterate through array for max product
         max_product = self.get_product(0)
         for i in range(1, total):
             current_product = self.get_product(i)
@@ -109,7 +110,25 @@ class Inventory:
     If the _products array is empty, it should return None
     '''
     def find_max_investment(self) -> Optional[Product]:
-        pass
+        #check if empty
+        total = self.get_total_products()
+        if total == 0:
+            return None
+        
+        #assign base
+        max_product = self.get_product(0)
+        max_investment = max_product.stock * max_product.price
+        
+        #iterate through array and do calculation to find max
+        for i in range(1, total):
+            current_product = self.get_product(i)
+            current_investment = current_product.stock * current_product.price
+            
+            if current_investment > max_investment:
+                max_investment = current_investment
+                max_product = current_product
+                
+        return max_product
 
     '''
     This function should sort the products stored in a dynamic array by
@@ -124,14 +143,28 @@ class Inventory:
           don't use python's built-in sort method. 
     '''
     def sort_by_stock(self) -> None:
-        pass
+        total = self.get_total_products()
+        #bubble sort
+        for i in range(total):
+            for j in range(0, total - i - 1):
+                prod_j = self.get_product(j)
+                prod_j_next = self.get_product(j + 1)
+                
+                #swap if the element is greater
+                if prod_j.stock > prod_j_next.stock:
+                    self.set_product(j, prod_j_next)
+                    self.set_product(j + 1, prod_j)
 
 
     '''
     This function should return string containing a comma-separated list of all products
     '''
     def __str__(self) -> str:
-        return ""
+        total = self.get_total_products()
+        product_strings = []
+        for i in range(total):
+            product_strings.append(str(self.get_product(i)))
+        return ", ".join(product_strings)
 
 if __name__ == "__main__":
     names = ["apples", "soup", "milk", "tofu", "poptarts", "lightbulbs", "soda", "chips"]
